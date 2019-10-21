@@ -39,4 +39,11 @@ class CheckYourAnswersController @Inject()(
 
       Ok(view())
   }
+
+  def onSubmit(): Action[AnyContent] = (identify andThen getData andThen requireData) {
+    implicit request =>
+
+
+      Redirect(routes.ApplicationCompleteController.onPageLoad)
+  }
 }

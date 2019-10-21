@@ -36,6 +36,6 @@ class ApplicationCompleteController @Inject()(
 
   def onPageLoad: Action[AnyContent] = (identify andThen getData andThen requireData) {
     implicit request =>
-      Ok(view())
+      Ok(view("Fake Number"))
   }
 }

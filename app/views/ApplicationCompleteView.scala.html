@@ -14,8 +14,26 @@
  * limitations under the License.
  *@
 
-@this()
+@import uk.gov.hmrc.govukfrontend.views.html.components.implicits._
+@import uk.gov.hmrc.govukfrontend.views.html.components._
 
-@()(implicit request: Request[_], messages: Messages)
+@this(layout: Layout,
+        govukPanel: GovukPanel)
 
-<h1>@messages("applicationComplete.heading")</h1>
+@(reference: String)(implicit request: Request[_], messages: Messages)
+
+@panelHtml = {
+ @messages("applicationComplete.panelText") <strong class="app-reference-number">@{reference}</strong>
+}
+
+@layout() {
+  @govukPanel(Panel(
+   title = Text(messages("applicationComplete.heading")),
+   content = HtmlContent(panelHtml)
+  ))
+
+  <h2 class="govuk-heading-m">@messages("applicationComplete.whatHappensNext.title")</h2>
+
+  <p class="govuk-body">@messages("applicationComplete.whatHappensNext.paragraph1")</p>
+  <p class="govuk-body">@messages("applicationComplete.whatHappensNext.paragraph2")</p>
+}

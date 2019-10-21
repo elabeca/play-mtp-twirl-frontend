@@ -11,6 +11,7 @@ GET        /language/:lang                      controllers.LanguageSwitchContro
 GET        /this-service-has-been-reset         controllers.SessionExpiredController.onPageLoad
 
 GET        /check-your-answers                  controllers.CheckYourAnswersController.onPageLoad
+POST        /check-your-answers                  controllers.CheckYourAnswersController.onSubmit
 
 GET        /address                             controllers.AddressController.onPageLoad(mode: Mode = NormalMode)
 POST       /address                             controllers.AddressController.onSubmit(mode: Mode = NormalMode)

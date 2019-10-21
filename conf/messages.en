@@ -1,5 +1,11 @@
 checkYourAnswers.title = Check your answers
 checkYourAnswers.heading = Check your answers
+checkYourAnswers.cta.header = Now send your application
+checkYourAnswers.cta.explanation = By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.
+checkYourAnswers.keys.name = Name
+checkYourAnswers.keys.phone = Phone number
+checkYourAnswers.keys.write = Can we write to you?
+checkYourAnswers.keys.address = Address
 
 date.day = Day
 date.month = Month
@@ -47,6 +53,10 @@ address.error.length = Your address must be 500 characters or less
 
 applicationComplete.title = Application complete
 applicationComplete.heading = Application complete
+applicationComplete.panelText = Your reference number
+applicationComplete.whatHappensNext.title = What happens next
+applicationComplete.whatHappensNext.paragraph1 = We’ve sent your application to the Fictional Ministry of Facts.
+applicationComplete.whatHappensNext.paragraph2 = They will not contact you neither to confirm your registration, nor to ask for more information.
 
 contactPreference.title = Can we write to you?
 contactPreference.heading = Can we write to you?
@@ -64,3 +74,5 @@ phoneNumber.heading = What is your phone number?
 phoneNumber.checkYourAnswersLabel = Phone number
 phoneNumber.error.required = Enter your phone number
 phoneNumber.error.length = Phone number must be 20 characters or less
+
+
