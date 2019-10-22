@@ -31,15 +31,15 @@ import views.html.NameView
 import scala.concurrent.{ExecutionContext, Future}
 
 class NameController @Inject()(
-                                        override val messagesApi: MessagesApi,
-                                        sessionRepository: SessionRepository,
-                                        navigator: Navigator,
-                                        identify: IdentifierAction,
-                                        getData: DataRetrievalAction,
-                                        formProvider: NameFormProvider,
-                                        val controllerComponents: MessagesControllerComponents,
-                                        view: NameView
-                                    )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
+                                override val messagesApi: MessagesApi,
+                                sessionRepository: SessionRepository,
+                                navigator: Navigator,
+                                identify: IdentifierAction,
+                                getData: DataRetrievalAction,
+                                formProvider: NameFormProvider,
+                                val controllerComponents: MessagesControllerComponents,
+                                view: NameView
+                              )(implicit ec: ExecutionContext) extends FrontendBaseController with I18nSupport {
 
   val form = formProvider()
 
@@ -64,7 +64,7 @@ class NameController @Inject()(
         value =>
           for {
             updatedAnswers <- Future.fromTry(request.userAnswers.getOrElse(UserAnswers(request.internalId)).set(NamePage, value))
-            _              <- sessionRepository.set(updatedAnswers)
+            _ <- sessionRepository.set(updatedAnswers)
           } yield Redirect(navigator.nextPage(NamePage, mode, updatedAnswers))
       )
   }
