@@ -1,5 +1,6 @@
 checkYourAnswers.title = Check your answers
 checkYourAnswers.heading = Check your answers
+checkYourAnswers.section = Personal details
 checkYourAnswers.cta.header = Now send your application
 checkYourAnswers.cta.explanation = By submitting this notification you are confirming that, to the best of your knowledge, the details you are providing are correct.
 checkYourAnswers.keys.name = Name

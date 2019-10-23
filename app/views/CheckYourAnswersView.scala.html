@@ -16,56 +16,31 @@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.implicits._
 @import uk.gov.hmrc.govukfrontend.views.html.components._
+@import views.ViewUtils
 
 @this(layout: Layout,
         govukSummaryList: GovukSummaryList,
-        formWithCSRF: FormWithCSRF)
+        govukButton: GovukButton,
+        form: FormWithCSRF)
 
-@()( implicit request: Request[_], messages: Messages)
+@(personalDetails: PersonalDetails)(implicit request: Request[_], messages: Messages)
 
-@layout(pageTitle = Some(messages("contactPreference.title") + " – " + messages("site.service_name"))) {
+    @layout(pageTitle = Some(messages("summary.title") + " – " + messages("site.service_name"))) {
 
- @govukSummaryList(SummaryList(
-  rows = Seq(
-   SummaryListRow(
-    key = Key(content = Text(messages("checkYourAnswers.keys.name"))),
-    value = Value(content = Text("These are all hard-coded")),
-    actions = Some(Actions(items = Seq(
-     ActionItem(href = "#", content = Text("Change"), visuallyHiddenText = Some("name"))
-    )))
-   ),
-   SummaryListRow(
-    key = Key(content = Text(messages("checkYourAnswers.keys.phone"))),
-    value = Value(content = Text("5 January 1978")),
-    actions = Some(Actions(items = Seq(
-     ActionItem(href = "#", content = Text("Change"), visuallyHiddenText = Some("date of birth"))
-    )))
-   ),
-   SummaryListRow(
-    key = Key(content = Text(messages("checkYourAnswers.keys.write"))),
-    value = Value(content = HtmlContent("""72 Guild Street<br>London<br>SE23 6FH""")),
-    actions = Some(Actions(items = Seq(
-     ActionItem(href = "#", content = Text("Change"), visuallyHiddenText = Some("contact information"))
-    )))
-   ),
-   SummaryListRow(
-    key = Key(content = Text(messages("checkYourAnswers.keys.address"))),
-    value = Value(content = HtmlContent(
-     """<p class="govuk-body">07700 900457</p>
-       |<p class="govuk-body">sarah.phillips@example.com</p>""".stripMargin)),
-    actions = Some(Actions(items = Seq(
-     ActionItem(href = "#", content = Text("Change"), visuallyHiddenText = Some("contact details"))
-    )))
-   )
-  )
- ))
+        @form(action = CheckYourAnswersController.onSubmit()) {
+            <header class="hmrc-page-heading">
+                <p class="govuk-caption-xl hmrc-caption-xl"><span class="govuk-visually-hidden">
+                    This section is </span>@messages("checkYourAnswers.section")</p>
+                <h1 class="govuk-heading-xl">@messages("checkYourAnswers.heading")</h1>
+            </header>
 
- @formWithCSRF(routes.CheckYourAnswersController.onSubmit) {
-  <h2 class="govuk-heading-m">@messages("checkYourAnswers.cta.header")</h2>
-  <p class="govuk-body">@messages("checkYourAnswers.cta.explanation")</p>
+            @govukSummaryList(ViewUtils.mapPersonalDetailsToSummary(personalDetails))
 
-  @GovukButton(Button(content = Text("Accept and send")))
- }
+            <h2 class="govuk-heading-m">Now send your application</h2>
 
+            <p class="govuk-body">By submitting this notification you are confirming that,
+                to the best of your knowledge, thedetails you are providing are correct.</p>
 
-}
+            @govukButton(Button(content = Text(messages("site.continue"))))
+        }
+    }

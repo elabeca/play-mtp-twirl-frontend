@@ -18,11 +18,12 @@ package controllers
 
 import com.google.inject.Inject
 import controllers.actions.{DataRequiredAction, DataRetrievalAction, IdentifierAction}
-import pages.ContactPreferencePage
+import pages.{AddressPage, ContactPreferencePage, NamePage, PhoneNumberPage}
 import play.api.i18n.{I18nSupport, MessagesApi}
 import play.api.mvc.{Action, AnyContent, MessagesControllerComponents}
 import uk.gov.hmrc.play.bootstrap.controller.FrontendBaseController
 import views.html.CheckYourAnswersView
+import models._
 
 class CheckYourAnswersController @Inject()(
                                             override val messagesApi: MessagesApi,
@@ -36,8 +37,15 @@ class CheckYourAnswersController @Inject()(
   def onPageLoad(): Action[AnyContent] = (identify andThen getData andThen requireData) {
     implicit request =>
 
+      val personalDetails = for (
+        name <- request.userAnswers.get(NamePage);
+        phone <- request.userAnswers.get(PhoneNumberPage);
+        address <- request.userAnswers.get(AddressPage);
+        canWeWrite <- request.userAnswers.get(ContactPreferencePage)
+      ) yield PersonalDetails(name, phone, address, canWeWrite)
 
-      Ok(view())
+
+      Ok(view(personalDetails.getOrElse(PersonalDetails())))
   }
 
   def onSubmit(): Action[AnyContent] = (identify andThen getData andThen requireData) {
