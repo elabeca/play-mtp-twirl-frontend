@@ -37,15 +37,13 @@ class CheckYourAnswersController @Inject()(
   def onPageLoad(): Action[AnyContent] = (identify andThen getData andThen requireData) {
     implicit request =>
 
-      val personalDetails = for (
-        name <- request.userAnswers.get(NamePage);
-        phone <- request.userAnswers.get(PhoneNumberPage);
-        address <- request.userAnswers.get(AddressPage);
-        canWeWrite <- request.userAnswers.get(ContactPreferencePage)
-      ) yield PersonalDetails(name, phone, address, canWeWrite)
+      val personalDetails = PersonalDetails(
+        request.userAnswers.get(NamePage),
+        request.userAnswers.get(PhoneNumberPage),
+        request.userAnswers.get(ContactPreferencePage),
+        request.userAnswers.get(AddressPage))
 
-
-      Ok(view(personalDetails.getOrElse(PersonalDetails())))
+      Ok(view(personalDetails))
   }
 
   def onSubmit(): Action[AnyContent] = (identify andThen getData andThen requireData) {

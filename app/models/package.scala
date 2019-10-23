@@ -143,7 +143,4 @@ package object models {
     }
   }
 
-  implicit def string2Name(name : String) : Name = Name(name)
-  implicit def string2PhoneNumber(phone : String) : PhoneNumber = PhoneNumber(phone)
-  implicit def stringSeq2Address(address : String) : Address = Address(address)
 }

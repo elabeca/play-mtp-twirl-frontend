@@ -17,7 +17,7 @@
 package views
 
 import controllers._
-import models.{CheckMode, PersonalDetails}
+import models._
 import play.api.i18n.Messages
 import uk.gov.hmrc.govukfrontend.views.html.components._
 
@@ -26,7 +26,7 @@ object ViewUtils {
   private def mapNameToSummary(pda: PersonalDetails): SummaryListRow =
     SummaryListRow(
       key = Key(Text("Name")),
-      value = Value(Text(s"${pda.name.name}")),
+      value = Value(Text(s"${pda.name.getOrElse(Name()).name}")),
       actions = Some(
         Actions(
           items = Seq(ActionItem(href = s"${routes.NameController.onPageLoad(CheckMode).url}", content = Text("Change")))))
@@ -35,33 +35,29 @@ object ViewUtils {
   private def mapPhoneToSummary(pda: PersonalDetails): SummaryListRow =
     SummaryListRow(
       key = Key(Text("Phone number")),
-      value = Value(Text(s"${pda.phone.phoneNumber}")),
+      value = Value(Text(s"${pda.phone.getOrElse(PhoneNumber()).phoneNumber}")),
       actions = Some(
         Actions(
           items = Seq(ActionItem(href = s"${routes.PhoneNumberController.onPageLoad(CheckMode)}", content = Text("Change")))))
     )
 
-  private def mapAddressToSummary(pda: PersonalDetails): SummaryListRow =
-    SummaryListRow(
-      key = Key(Text("Address")),
-      value = Value(Text(s"${pda.address.lines}")),
-      actions = Some(Actions(
-        items = Seq(ActionItem(href = s"${routes.AddressController.onPageLoad(CheckMode)}", content = Text("Change")))))
-    )
-
   private def mapContactPrefToSummary(pda: PersonalDetails): SummaryListRow =
     SummaryListRow(
       key = Key(Text("Can we write to you?")),
-      value = Value(Text(s"${pda.canWeWrite}")),
+      value = Value(Text(s"${pda.canWeWrite.getOrElse(CanWeWrite()).contact}")),
       actions = Some(Actions(
         items = Seq(ActionItem(href = s"${routes.ContactPreferenceController.onPageLoad(CheckMode)}", content = Text("Change")))))
     )
 
+  private def mapAddressToSummary(address: Address): SummaryListRow =
+    SummaryListRow(
+      key = Key(Text("Address")),
+      value = Value(Text(s"${address.lines}")),
+      actions = Some(Actions(
+        items = Seq(ActionItem(href = s"${routes.AddressController.onPageLoad(CheckMode)}", content = Text("Change")))))
+    )
+
   def mapPersonalDetailsToSummary(details: PersonalDetails)(implicit messages: Messages): SummaryList = {
-    SummaryList(Seq(
-      mapNameToSummary(details),
-      mapPhoneToSummary(details),
-      mapAddressToSummary(details),
-      mapContactPrefToSummary(details)))
+    SummaryList(Seq(mapNameToSummary(details), mapPhoneToSummary(details), mapContactPrefToSummary(details)) ++ (details.address map mapAddressToSummary))
   }
 }

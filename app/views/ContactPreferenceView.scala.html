@@ -44,8 +44,8 @@
                     ))
                 )),
                 items = Seq(
-                    RadioItem(value = Some("true"), content = Text("Yes"), checked = form.value),
-                    RadioItem(value = Some("false"), content = Text("No"), checked = !form.value)
+                    RadioItem(value = Some("true"), content = Text(messages("site.yes")), checked = form.value),
+                    RadioItem(value = Some("false"), content = Text(messages("site.no")), checked = !form.value)
                 )
             ))
 

@@ -16,18 +16,37 @@
 
 package models
 
-import scala.collection.immutable.Stream.Empty
+case class Name(name: String = "")
 
-case class Name(name: String)
+object Name {
+  implicit def string2Name(name: Option[String]): Option[Name] = name.map(op => Name(op))
+}
 
-case class PhoneNumber(phoneNumber: String)
+case class PhoneNumber(phoneNumber: String = "")
 
-case class Address(lines: String)
+object PhoneNumber {
+  implicit def string2PhoneNumber(phone: Option[String]): Option[PhoneNumber] = phone.map(op => PhoneNumber(op))
+}
+
+case class CanWeWrite(contact: Boolean = false)
+
+object CanWeWrite {
+  implicit def boolean2CanWeWrite(canWeWrite: Option[Boolean]): Option[CanWeWrite] = canWeWrite.map(op => CanWeWrite(op))
+}
+
+case class Address(lines: String = "")
+
+object Address {
+  implicit def string2Address(address: Option[String]): Option[Address] = address.map(op => Address(op))
+}
 
 case class PersonalDetails(
-                            name: Name = Name(""),
-                            phone: PhoneNumber = PhoneNumber(""),
-                            address: Address = Address(""),
-                            canWeWrite: Boolean = false)
+                            name: Option[Name] = None,
+                            phone: Option[PhoneNumber] = None,
+                            canWeWrite: Option[CanWeWrite] = None,
+                            address: Option[Address] = None
+                          )
+
+
 
 
