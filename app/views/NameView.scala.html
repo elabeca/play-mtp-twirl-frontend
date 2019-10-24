@@ -26,16 +26,18 @@
 
 @(form: Form[String], mode: Mode)(implicit request: Request[_], messages: Messages)
 
-    @layout(
-        pageTitle = Some(messages("name.title") + " – " + messages("site.service_name")),
-        beforeContentBlock = Some(backLink(BackLink(href = routes.IndexController.onPageLoad().url, content = Text(messages("site.back")))))) {
-        @formWithCSRF(action = routes.NameController.onSubmit(mode)) {
+@layout(
+    pageTitle = Some(messages("name.title") + " – " + messages("site.service_name")),
+    beforeContentBlock = Some(backLink(BackLink(href = routes.IndexController.onPageLoad().url, content = Text(messages("site.back")))))) {
+    @formWithCSRF(action = routes.NameController.onSubmit(mode)) {
+        @if(form.errors.nonEmpty) {
             @errorSummary(ErrorSummary(errorList = form.errors.asTextErrorLinks, title = Text(messages("error.summary.title"))))
-
-            @input(Input(id = "value", name = "value", value = form.value,
-                errorMessage = form.errors.asTextErrorMessageForField(fieldKey = "value"),
-                label = Label(isPageHeading = true, classes = "govuk-label--l", content = Text(messages("name.heading")))))
-
-            @button(Button(content = Text(messages("site.continue"))))
         }
+
+        @input(Input(id = "value", name = "value", value = form.value,
+            errorMessage = form.errors.asTextErrorMessageForField(fieldKey = "value"),
+            label = Label(isPageHeading = true, classes = "govuk-label--l", content = Text(messages("name.heading")))))
+
+        @button(Button(content = Text(messages("site.continue"))))
     }
+}

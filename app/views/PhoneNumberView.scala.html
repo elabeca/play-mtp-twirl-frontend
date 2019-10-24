@@ -29,10 +29,11 @@
         beforeContentBlock = Some(govukBackLink(BackLink(href = routes.NameController.onPageLoad(mode).url, content = Text(messages("site.back")))))) {
 
         @formWithCSRF(action = routes.PhoneNumberController.onSubmit(mode)) {
+            @if(form.errors.nonEmpty) {
+                @govukErrorSummary(ErrorSummary(errorList = form.errors.asTextErrorLinks, title = Text(messages("error.summary.title"))))
+            }
 
-            @govukErrorSummary(ErrorSummary(errorList = form.errors.asTextErrorLinks, title = Text(messages("error.summary.title"))))
-
-            @govukInput(Input(id = "phone-number", name = "value", value = form.value,
+            @govukInput(Input(id = "value", name = "value", value = form.value,
                 errorMessage = form.errors.asTextErrorMessageForField(fieldKey = "value"),
                 label = Label(isPageHeading = true, classes = "govuk-label--l", content = Text(messages("phoneNumber.heading")))))
 
