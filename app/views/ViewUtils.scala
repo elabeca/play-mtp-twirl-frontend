@@ -41,10 +41,10 @@ object ViewUtils {
           items = Seq(ActionItem(href = s"${routes.PhoneNumberController.onPageLoad(CheckMode)}", content = Text("Change")))))
     )
 
-  private def mapContactPrefToSummary(pda: PersonalDetails): SummaryListRow =
+  private def mapContactPrefToSummary(pda: PersonalDetails)(implicit messages: Messages): SummaryListRow =
     SummaryListRow(
       key = Key(Text("Can we write to you?")),
-      value = Value(Text(s"${pda.canWeWrite.getOrElse(CanWeWrite()).contact}")),
+      value = Value(Text(messages(s"site.${pda.canWeWrite.getOrElse(CanWeWrite()).contact}"))),
       actions = Some(Actions(
         items = Seq(ActionItem(href = s"${routes.ContactPreferenceController.onPageLoad(CheckMode)}", content = Text("Change")))))
     )
