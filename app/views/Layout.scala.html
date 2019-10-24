@@ -38,7 +38,7 @@
       homepageUrl = Some(routes.IndexController.onPageLoad().url),
       serviceName = Some("Personal Details Account"),
       serviceUrl = Some(routes.IndexController.onPageLoad().url),
-      containerClasses = "govuk-width-container"))
+      containerClasses = Some("govuk-width-container")))
   }
 }
 
@@ -54,9 +54,9 @@
 
 @footerDefault = {
 @footer(Footer(meta = Some(Meta(
-  items = Seq(
+  items = Some(Seq(
     FooterItem(href = Some("https://govuk-prototype-kit.herokuapp.com/"), text = Some("GOV.UK Prototype Kit v9.1.0"))
-  )))))
+  ))))))
 }
 
 @bodyEndDefault = {@bodyEndBlock.getOrElse {@scripts()}}
