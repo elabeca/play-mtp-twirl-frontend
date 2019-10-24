@@ -15,68 +15,17 @@
  *@
 
 @this(
-  govukTemplate: GovukTemplate,
-  phaseBanner: GovukPhaseBanner,
-  head: head,
-  header: GovukHeader,
-  footer: GovukFooter,
-  scripts: scripts,
-  backLink: GovukBackLink
+        govukLayout: GovukLayout,
+        head: head,
+        scripts: scripts
 )
 
 @(pageTitle: Option[String] = None,
-  headBlock: Option[Html] = None,
-  headerBlock: Option[Html] = None,
-  beforeContentBlock: Option[Html] = None,
-  bodyEndBlock: Option[Html] = None)(contentBlock: Html)(implicit request: Request[_], messages: Messages)
+        beforeContentBlock: Option[Html] = None)(contentBlock: Html)(implicit request: Request[_], messages: Messages)
 
-@headDefault = {@headBlock.getOrElse {@head()}}
-
-@headerDefault = {
-  @headerBlock.getOrElse {
-    @header(Header(
-      homepageUrl = Some(routes.IndexController.onPageLoad().url),
-      serviceName = Some("Personal Details Account"),
-      serviceUrl = Some(routes.IndexController.onPageLoad().url),
-      containerClasses = Some("govuk-width-container")))
-  }
-}
-
-@phaseBannerMessage = {
-  This is a new service – your <a class="govuk-link" href="#"> feedback</a> will help us to improve it.
-}
-
-@phaseBannerDefault = {
-  @defining(Tag(Text("beta"))) { tag =>
-    @phaseBanner(PhaseBanner(tag = Some(tag), content =(HtmlContent(phaseBannerMessage))))
-  }
-}
-
-@footerDefault = {
-@footer(Footer(meta = Some(Meta(
-  items = Some(Seq(
-    FooterItem(href = Some("https://govuk-prototype-kit.herokuapp.com/"), text = Some("GOV.UK Prototype Kit v9.1.0"))
-  ))))))
-}
-
-@bodyEndDefault = {@bodyEndBlock.getOrElse {@scripts()}}
-
-@mainContentDefault = {
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      @contentBlock
-    </div>
-  </div>
-}
-
-@govukTemplate(
-  htmlLang = Some("en"),
-  pageTitle = pageTitle,
-  headBlock = Some(headDefault),
-  headerBlock = headerDefault,
-  beforeContentBlock = beforeContentBlock,
-  footerBlock = footerDefault,
-  mainClasses = Some("govuk-main-wrapper--auto-spacing"),
-  bodyEndBlock = Some(bodyEndDefault))(mainContentDefault)
-
-
+@govukLayout(
+    pageTitle = pageTitle,
+    headBlock = Some(head()),
+    beforeContentBlock = beforeContentBlock,
+    footerItems = Seq(FooterItem(href = Some("https://govuk-prototype-kit.herokuapp.com/"), text = Some("GOV.UK Prototype Kit v9.1.0"))),
+    bodyEndBlock = Some(scripts()))(contentBlock)
