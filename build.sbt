@@ -4,7 +4,7 @@ import scoverage.ScoverageKeys
 import uk.gov.hmrc.DefaultBuildSettings
 import uk.gov.hmrc.versioning.SbtGitVersioning.autoImport.majorVersion
 
-lazy val appName: String = "play-mtp-frontend"
+lazy val appName: String = "play-mtp-twirl-frontend"
 
 lazy val root = (project in file("."))
   .enablePlugins(PlayScala,
