@@ -41,9 +41,10 @@ lazy val root = (project in file("."))
       EvictionWarningOptions.default.withWarnScalaVersionEviction(false),
     resolvers ++= Seq(
       Resolver.bintrayRepo("hmrc", "releases"),
-      Resolver.jcenterRepo
-    ),
-    resolvers += "hmrc-releases" at "https://artefacts.tax.service.gov.uk/artifactory/hmrc-releases/"
+      Resolver.jcenterRepo,
+      "hmrc-releases" at "https://artefacts.tax.service.gov.uk/artifactory/hmrc-releases/",
+      "bintray" at "https://dl.bintray.com/webjars/maven"
+    )
   )
 
 lazy val testSettings: Seq[Def.Setting[_]] = Seq(
