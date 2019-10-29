@@ -35,7 +35,7 @@ session_expired.heading = For your security, this service has been reset
 session_expired.guidance = The details you have given have been deleted because you did not continue the service for 15 minutes.
 
 service.name = Personal Details Account
-service.homePageUrl = /play-mtp-frontend 
+service.homePageUrl = /play-mtp-twirl-frontend
 site.back = Back
 site.delete = Remove
 site.edit = Change

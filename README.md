@@ -9,7 +9,7 @@
 
 2>  Add SASS assets to app/assets/stylesheets in application.scss to inherit / extend GovUk style assets / elements
 ```
-$govuk-assets-path: "/play-mtp-frontend/assets/lib/govuk-frontend/govuk/assets/";
+$govuk-assets-path: "/play-mtp-twirl-frontend/assets/lib/govuk-frontend/govuk/assets/";
 
 @import "lib/govuk-frontend/govuk/all";
 
