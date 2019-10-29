@@ -17,9 +17,11 @@
 package controllers
 
 import base.SpecBase
+import org.scalatest._
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 
+@Ignore
 class CheckYourAnswersControllerSpec extends SpecBase {
 
   "Check Your Answers Controller" must {

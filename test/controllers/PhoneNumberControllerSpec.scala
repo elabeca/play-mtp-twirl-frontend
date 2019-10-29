@@ -22,6 +22,7 @@ import models.{NormalMode, UserAnswers}
 import navigation.{FakeNavigator, Navigator}
 import org.mockito.Matchers.any
 import org.mockito.Mockito.when
+import org.scalatest._
 import org.scalatestplus.mockito.MockitoSugar
 import pages.PhoneNumberPage
 import play.api.inject.bind
@@ -33,6 +34,7 @@ import views.html.PhoneNumberView
 
 import scala.concurrent.Future
 
+@Ignore
 class PhoneNumberControllerSpec extends SpecBase with MockitoSugar {
 
   def onwardRoute = Call("GET", "/foo")
