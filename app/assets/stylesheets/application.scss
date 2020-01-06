@@ -6,3 +6,12 @@ $govuk-assets-path: "/play-mtp-twirl-frontend/assets/lib/govuk-frontend/govuk/as
   display: block;
   font-weight: bold;
 }
+
+#hmrc-cookie-preference-display {
+
+  border: 5px solid #00703c;
+
+  &.hmrc-cookie-preference-display--hidden {
+    display: none
+  }
+}

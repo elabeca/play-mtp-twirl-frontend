@@ -1,5 +1,5 @@
 @*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,14 @@
 @()(implicit request: Request[_], messages: Messages)
 
 @layout(pageTitle = Some(messages("index.title") + " – " + messages("site.service_name"))) {
+
+    <div id="hmrc-cookie-preference-display" class="hmrc-cookie-preference-display--hidden govuk-panel">
+        <h3 class="govuk-heading-l">Do you consent to us tracking you?</h3>
+        <p class="govuk-body">We use track for the purposes of tracking, communication and measurement</p>
+        <p><button class="acceptAll govuk-button">Accept All</button></p>
+        <p><button class="acceptCommunication govuk-button govuk-button--secondary">Accept only communication</button>
+        <button class="acceptTracking govuk-button govuk-button--secondary">Accept only tracking</button></p>
+    </div>
 
   <h1 class="govuk-heading-xl">@messages("index.heading")</h1>
   <p class="govuk-body">Use this service to:</p>
