@@ -1,5 +1,5 @@
 @*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,23 +16,25 @@
 
 @import uk.gov.hmrc.govukfrontend.views.html.components.implicits._
 @import uk.gov.hmrc.govukfrontend.views.html.components._
+@import uk.gov.hmrc.hmrcfrontend.views.html.components._
 @import views.ViewUtils
 
 @this(layout: Layout,
         govukSummaryList: GovukSummaryList,
         govukButton: GovukButton,
-        form: FormWithCSRF)
+        form: FormWithCSRF,
+        hmrcPageHeading : HmrcPageHeading)
 
-@(personalDetails: PersonalDetails)(implicit request: Request[_], messages: Messages)
+@(personalDetails: PDetails)(implicit request: Request[_], messages: Messages)
 
     @layout(pageTitle = Some(messages("summary.title") + " – " + messages("site.service_name"))) {
 
         @form(action = CheckYourAnswersController.onSubmit()) {
-            <header class="hmrc-page-heading">
-                <p class="govuk-caption-xl hmrc-caption-xl"><span class="govuk-visually-hidden">
-                    This section is </span>@messages("checkYourAnswers.section")</p>
-                <h1 class="govuk-heading-xl">@messages("checkYourAnswers.heading")</h1>
-            </header>
+
+            @hmrcPageHeading(PageHeading(
+                text = messages("checkYourAnswers.heading"),
+                section = Some(messages("checkYourAnswers.section"))
+            ))
 
             @govukSummaryList(ViewUtils.mapPersonalDetailsToSummary(personalDetails))
 

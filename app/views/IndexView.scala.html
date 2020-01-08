@@ -1,5 +1,5 @@
 @*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,11 @@
  * limitations under the License.
  *@
 
+@import uk.gov.hmrc.hmrcfrontend.views.html.components._
+
 @this(layout: Layout,
-      button: GovukButton)
+      button: GovukButton,
+        hmrcAccountMenu : HmrcAccountMenu)
 
 @()(implicit request: Request[_], messages: Messages)
 
@@ -35,6 +38,23 @@
     href = Some(routes.NameController.onPageLoad(NormalMode).url),
     isStartButton = true,
     content = Text(messages("site.start"))))
+
+    @hmrcAccountMenu(AccountMenu(
+        accountHome = AccountHome(
+            href = "#account-home",
+            active = true
+        ),
+        messages = AccountMessages(
+            href = "#messages",
+            messageCount = Some(2)
+        ),
+        checkProgress = CheckProgress(
+            href = "#check-progress"
+        ),
+        paperlessSettings = PaperlessSettings("#paperless-settings"),
+        personalDetails = PersonalDetails("#personal-details"),
+        signOut = SignOut("#sign-out")
+    ))
 }
 
 

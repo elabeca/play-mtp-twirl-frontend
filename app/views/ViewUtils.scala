@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import uk.gov.hmrc.govukfrontend.views.html.components._
 
 object ViewUtils {
 
-  private def mapNameToSummary(pda: PersonalDetails): SummaryListRow =
+  private def mapNameToSummary(pda: PDetails): SummaryListRow =
     SummaryListRow(
       key = Key(Text("Name")),
       value = Value(Text(s"${pda.name.getOrElse(Name()).name}")),
@@ -32,7 +32,7 @@ object ViewUtils {
           items = Seq(ActionItem(href = s"${routes.NameController.onPageLoad(CheckMode).url}", content = Text("Change")))))
     )
 
-  private def mapPhoneToSummary(pda: PersonalDetails): SummaryListRow =
+  private def mapPhoneToSummary(pda: PDetails): SummaryListRow =
     SummaryListRow(
       key = Key(Text("Phone number")),
       value = Value(Text(s"${pda.phone.getOrElse(PhoneNumber()).phoneNumber}")),
@@ -41,7 +41,7 @@ object ViewUtils {
           items = Seq(ActionItem(href = s"${routes.PhoneNumberController.onPageLoad(CheckMode)}", content = Text("Change")))))
     )
 
-  private def mapContactPrefToSummary(pda: PersonalDetails)(implicit messages: Messages): SummaryListRow =
+  private def mapContactPrefToSummary(pda: PDetails)(implicit messages: Messages): SummaryListRow =
     SummaryListRow(
       key = Key(Text("Can we write to you?")),
       value = Value(Text(messages(s"site.${pda.canWeWrite.getOrElse(CanWeWrite()).contact}"))),
@@ -57,7 +57,7 @@ object ViewUtils {
         items = Seq(ActionItem(href = s"${routes.AddressController.onPageLoad(CheckMode)}", content = Text("Change")))))
     )
 
-  def mapPersonalDetailsToSummary(details: PersonalDetails)(implicit messages: Messages): SummaryList = {
+  def mapPersonalDetailsToSummary(details: PDetails)(implicit messages: Messages): SummaryList = {
     SummaryList(Seq(mapNameToSummary(details), mapPhoneToSummary(details), mapContactPrefToSummary(details)) ++ (details.address map mapAddressToSummary))
   }
 }
